@@ -16,14 +16,10 @@ class App extends Component {
     filter: '',
   };
 
-  contactsChange = (name, number) => {
-    const newObj = { id: nanoid(), name: name, number: number };
-    for (const contact of this.state.contacts) {
-      if (contact.name !== name) {
-        continue;
-      }
-      alert(`${name} is already in contacts`);
-      return;
+  contactsChange = (newName, number) => {
+    const newObj = { id: nanoid(), name: newName, number: number };
+    if (this.state.contacts.find(({name}) => newName.toLowerCase() === name.toLowerCase())) {
+      return alert(`${newName} is already in contacts`)
     }
     this.setState(({ contacts }) => ({ contacts: [...contacts, newObj] }));
   };
